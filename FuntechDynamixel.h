@@ -80,16 +80,16 @@ union {
 class FuntechDynamixel {
   public:
     FuntechDynamixel(void);
-    void setAddress(char address);
-    void ping(char address);
-    void enable(char address);
-    void disable(char address);
-    void setPosition(char address, int pos);
+    void setAddress(unsigned char address);
+    void ping(unsigned char address);
+    void enable(unsigned char address);
+    void disable(unsigned char address);
+    void setPosition(unsigned char address, int pos);
     // Public but use this only if you know what you do
-    FuntechDynamixel_Error writeRegister(char address, FuntechDynamixel_Register reg, int value);
-    FuntechDynamixel_Error readRegister(char address, FuntechDynamixel_Register reg, int *val);
+    FuntechDynamixel_Error writeRegister(unsigned char address, FuntechDynamixel_Register reg, int value);
+    FuntechDynamixel_Error readRegister(unsigned char address, FuntechDynamixel_Register reg, int *val);
   private:
-    void sendInstruction(char address, FuntechDynamixel_Instruction instruction, size_t size, unsigned char *data);
+    void sendInstruction(unsigned char address, FuntechDynamixel_Instruction instruction, size_t size, unsigned char *data);
     void sendPacket(size_t size, unsigned char *data);
     unsigned char checksum(size_t size, unsigned char *data);
 };

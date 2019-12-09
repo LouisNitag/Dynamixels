@@ -5,23 +5,23 @@
 FuntechDynamixel::FuntechDynamixel(void) {
 }
 
-void FuntechDynamixel::setAddress(char address) {
+void FuntechDynamixel::setAddress(unsigned char address) {
   this->writeRegister(0xFE, FDR_ID, address);
 }
 
-void FuntechDynamixel::ping(char address) {
+void FuntechDynamixel::ping(unsigned char address) {
   this->sendInstruction(address, FDI_PING, 0, (void*)(0));
 }
 
-void FuntechDynamixel::enable(char address) {
+void FuntechDynamixel::enable(unsigned char address) {
   this->writeRegister(address, FDR_TORQUE_ENABLE, 1);
 }
 
-void FuntechDynamixel::disable(char address) {
+void FuntechDynamixel::disable(unsigned char address) {
   this->writeRegister(address, FDR_TORQUE_ENABLE, 0);
 }
 
-void FuntechDynamixel::setPosition(char address, int pos) {
+void FuntechDynamixel::setPosition(unsigned char address, int pos) {
   for(int i = 0; i < 3; i++) {
     if(this->writeRegister(address, FDR_GOAL_POSITION, pos) == FDE_OK) return FDE_OK;
   }
@@ -33,7 +33,7 @@ void FuntechDynamixel::setPosition(char address, int pos) {
   return this->readRegister(address, FDR_GOAL_POSITION, pos) == FDE_OK) return FDE_OK;
 }*/
 
-FuntechDynamixel_Error FuntechDynamixel::writeRegister(char address, FuntechDynamixel_Register reg, int value) {
+FuntechDynamixel_Error FuntechDynamixel::writeRegister(unsigned char address, FuntechDynamixel_Register reg, int value) {
   unsigned char data[3];
   unsigned char rx_buffer[15];
   
@@ -107,7 +107,7 @@ FuntechDynamixel_Error FuntechDynamixel::writeRegister(char address, FuntechDyna
   return FDE_OK;
 }
 
-FuntechDynamixel_Error FuntechDynamixel::readRegister(char address, FuntechDynamixel_Register reg, int *val) {
+FuntechDynamixel_Error FuntechDynamixel::readRegister(unsigned char address, FuntechDynamixel_Register reg, int *val) {
   unsigned char data[2];
   unsigned char rx_buffer[15];
   size_t len = 0;
@@ -217,7 +217,7 @@ void FuntechDynamixel::sendPacket(size_t size, unsigned char *data) {
   SERIAL.readBytes(buffer, SERIAL.available());
 }
 
-void FuntechDynamixel::sendInstruction(char address, FuntechDynamixel_Instruction instruction, size_t size, unsigned char *data) {
+void FuntechDynamixel::sendInstruction(unsigned char address, FuntechDynamixel_Instruction instruction, size_t size, unsigned char *data) {
   char packet[10];
  
   packet[0] = address;

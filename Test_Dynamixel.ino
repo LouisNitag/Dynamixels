@@ -58,7 +58,7 @@ void loop() {
           while(dyna.readRegister(addresses[i], FDR_PRESENT_POSITION, &val) != FDE_OK) {
             delay(1);
           }
-          Serial.println(val);
+          // Serial.println(val);
           positions[slot][i] = val;
         }
         
@@ -73,7 +73,7 @@ void loop() {
           while(dyna.writeRegister(addresses[i], FDR_GOAL_POSITION, positions[slot][i]) != FDE_OK) {
             delay(1);
           }
-          Serial.print("Set motor "); Serial.print((int)addresses[i]); Serial.print(" to "); Serial.println(positions[slot][i]);
+          //Serial.print("Set motor "); Serial.print((int)addresses[i]); Serial.print(" to "); Serial.println(positions[slot][i]);
         }
 
         Serial.print("Play position from slot ");
@@ -84,14 +84,14 @@ void loop() {
         add = Serial.parseInt();
         reg = Serial.parseInt();
         val = Serial.parseInt();
-        Serial.print("Write "); Serial.print(val); Serial.print(" on "); Serial.print((int)reg); Serial.print(" at "); Serial.println((int)add); 
+        // Serial.print("Write "); Serial.print(val); Serial.print(" on "); Serial.print((int)reg); Serial.print(" at "); Serial.println((int)add); 
         Serial.println(dyna.writeRegister(add, reg, val));
         break;
         
       case 'R':
         add = Serial.parseInt();
         reg = Serial.parseInt();
-        Serial.print("Read "); Serial.print((int)reg); Serial.print(" from "); Serial.println((int)add); 
+        // Serial.print("Read "); Serial.print((int)reg); Serial.print(" from "); Serial.println((int)add); 
         Serial.println(dyna.readRegister(add, reg, &val));
         Serial.print("Value: "); Serial.println(val);
         break;
